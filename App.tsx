@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import MobileNav from './components/MobileNav';
 import Overview from './pages/Overview';
@@ -13,6 +12,11 @@ import Activity from './pages/Activity';
 // Layout wrapper component
 const Layout = ({ children }: { children?: React.ReactNode }) => {
   const [easterEgg, setEasterEgg] = useState(false);
+  const location = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location.pathname]);
 
   return (
     <div className="min-h-screen bg-paper text-ink font-sans selection:bg-accent/20">
