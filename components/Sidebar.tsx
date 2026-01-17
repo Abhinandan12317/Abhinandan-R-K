@@ -124,7 +124,7 @@ const Sidebar = () => {
                <img 
                 src={PERSONAL_DETAILS.profilePicture}
                 alt="Profile" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                className="w-full h-full object-cover transition-all duration-500"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=Abhinandan&background=ffffff&color=1E1E1E&size=128';
                 }}
