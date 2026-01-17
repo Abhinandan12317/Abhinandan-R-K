@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, Navigate, Link } from 'react-router-dom';
 import { DOC_SECTIONS } from '../constants';
 import ReactMarkdown from 'react-markdown';
 
@@ -24,6 +24,20 @@ const Documentation = () => {
   }
 
   const isEvolution = doc.id === 'evolution';
+
+  // Linear navigation order
+  const navOrder = [
+    { label: 'Principles', path: '/documentation/principles' },
+    { label: 'Systems', path: '/documentation/systems' },
+    { label: 'Decisions', path: '/documentation/decisions' },
+    { label: 'Evolution', path: '/documentation/evolution' },
+    { label: 'Activity', path: '/activity' },
+    { label: 'Resume', path: '/resume' },
+    { label: 'Projects', path: '/projects/niyogenai' }, // First project
+  ];
+  const currentIdx = navOrder.findIndex(item => item.path.endsWith(slug || 'principles'));
+  const prev = currentIdx > 0 ? navOrder[currentIdx - 1] : null;
+  const next = currentIdx < navOrder.length - 1 ? navOrder[currentIdx + 1] : null;
 
   return (
     <article className="max-w-2xl animate-fade-in pb-20">
@@ -65,6 +79,19 @@ const Documentation = () => {
       
       <div className="mt-16 pt-8 border-t border-border flex justify-between items-center opacity-50">
         <span className="font-mono text-xs">END OF DOCUMENT</span>
+      </div>
+      {/* Navigation Controls */}
+      <div className="flex justify-between items-center mt-16 pt-8 border-t border-border">
+        {prev ? (
+          <Link to={prev.path} className="text-accent hover:underline font-mono text-xs">
+            ← Previous: {prev.label}
+          </Link>
+        ) : <span />}
+        {next ? (
+          <Link to={next.path} className="text-accent hover:underline font-mono text-xs">
+            Next: {next.label} →
+          </Link>
+        ) : <span />}
       </div>
     </article>
   );

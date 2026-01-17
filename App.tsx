@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import MobileNav from './components/MobileNav';
+import SideImageColumn from './components/SideImageColumn';
 import Overview from './pages/Overview';
 import ProjectDetail from './pages/ProjectDetail';
 import Resume from './pages/Resume';
@@ -22,6 +23,7 @@ const Layout = ({ children }: { children?: React.ReactNode }) => {
     <div className="min-h-screen bg-paper text-ink font-sans selection:bg-accent/20">
       <Sidebar />
       <MobileNav />
+      <SideImageColumn />
       <main className="md:ml-64 min-h-screen">
         <div className="max-w-5xl mx-auto px-6 py-20 md:py-24">
           {children}
