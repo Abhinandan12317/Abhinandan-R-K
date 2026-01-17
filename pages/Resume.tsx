@@ -27,16 +27,6 @@ const Resume = () => {
               <p className="text-xs text-subtle mt-2 font-mono">Kuvempunagar, Mysuru • ark45072@gmail.com • +91 9482053968</p>
               <p className="text-xs text-subtle mt-1 font-mono">LinkedIn: abhinandanrk</p>
             </div>
-            <div className="hidden md:block w-24 h-24 border border-border bg-paper">
-                <img 
-                  src={PERSONAL_DETAILS.profilePicture} 
-                  alt="Profile" 
-                  className="w-full h-full object-cover grayscale"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=Abhinandan&background=F6F5F2&color=1E1E1E&size=128';
-                  }}
-                />
-            </div>
           </header>
 
           <section>
@@ -69,8 +59,8 @@ const Resume = () => {
                   <span className="text-subtle font-mono text-xs">2025</span>
                 </div>
                 <ul className="list-disc list-inside text-subtle text-sm leading-relaxed marker:text-gray-300">
-                  <li>Deployed **OpsLensAI**: A GenAI-powered log analysis tool reducing MTTR for developers.</li>
-                  <li>Deployed **Execution Ledger**: A gamified productivity app with strict discipline mechanics.</li>
+                  <li>Deployed <span className="font-bold">OpsLensAI</span>: A GenAI-powered log analysis tool reducing MTTR for developers.</li>
+                  <li>Deployed <span className="font-bold">Execution Ledger</span>: A gamified productivity app with strict discipline mechanics.</li>
                 </ul>
               </div>
               <div>
@@ -115,10 +105,10 @@ const Resume = () => {
           <section>
             <h3 className="font-bold text-black uppercase tracking-wider text-xs mb-4">Achievements & Leadership</h3>
              <ul className="list-disc list-inside text-subtle text-sm leading-relaxed marker:text-gray-300">
-               <li>**Publication (2025)**: Published journal on "Automated file classification and notes sharing using Whatsapp Bot" (N8N Project).</li>
-               <li>**Speaker (2025)**: Delivered a live technical demo on **Gemini-CLI** at a tech event.</li>
-               <li>**Hackathon Finalist**: Code-Battle 2k25 Participant & Resume Analyzer Project.</li>
-               <li>**IEEE Student Branch Secretary**: Organized tech workshops and events (2023-Present).</li>
+               <li><span className="font-bold">Publication (2025)</span>: Published journal on "Automated file classification and notes sharing using Whatsapp Bot" (N8N Project).</li>
+               <li><span className="font-bold">Speaker (2025)</span>: Delivered a live technical demo on <span className="font-bold">Gemini-CLI</span> at a tech event.</li>
+               <li><span className="font-bold">Hackathon Finalist</span>: Code-Battle 2k25 Participant & Resume Analyzer Project.</li>
+               <li><span className="font-bold">IEEE Student Branch Secretary</span>: Organized tech workshops and events (2023-Present).</li>
              </ul>
           </section>
         </div>
