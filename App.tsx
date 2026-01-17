@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
@@ -7,6 +8,7 @@ import ProjectDetail from './pages/ProjectDetail';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
 import Documentation from './pages/Documentation';
+import Activity from './pages/Activity';
 
 // Layout wrapper component
 const Layout = ({ children }: { children?: React.ReactNode }) => {
@@ -54,6 +56,7 @@ const App = () => {
           <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/documentation/:slug" element={<Documentation />} />
+          <Route path="/activity" element={<Activity />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

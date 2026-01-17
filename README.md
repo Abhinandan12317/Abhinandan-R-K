@@ -1,40 +1,20 @@
-# About Abhinandan
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-Welcome to my personal portfolio project! This app showcases my work, resume, and contact information.
+# Run and deploy your AI Studio app
 
-## Getting Started
+This contains everything you need to run your app locally.
 
-**Prerequisites:**
-- Node.js (v16 or higher recommended)
+View your app in AI Studio: https://ai.studio/apps/drive/1htq9HOcuGXg4RJ2I7eosvwZdhYPNItwX
 
-### Installation
-1. Clone this repository.
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. (Optional) Set up environment variables in `.env.local` if needed.
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
+## Run Locally
 
-## Profile Picture & Resume
+**Prerequisites:**  Node.js
 
-To add your profile picture and resume:
-1. Place your profile image (e.g., `profile.jpg`) and resume PDF (e.g., `ARK_Resume.pdf`) in the `public/` folder at the root of the project. If the folder does not exist, create it.
-2. The app will automatically use these files for your profile and resume download links.
-   - Profile image: `/profile.jpg`
-   - Resume: `/ARK_Resume.pdf`
-3. If you change the filenames, update the paths in `constants.ts` under `PERSONAL_DETAILS`.
 
-## Features
-- Modern React + Vite setup
-- Responsive design
-- Sidebar navigation
-- Downloadable resume
-- Contact form
-
----
-
-Feel free to fork, modify, and use this project as inspiration for your own portfolio!
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`

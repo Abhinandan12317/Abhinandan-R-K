@@ -1,4 +1,5 @@
-import { Project, ProjectSectionType, DocEntry } from './types';
+
+import { Project, ProjectSectionType, DocEntry, ActivityItem } from './types';
 
 export const PERSONAL_DETAILS = {
   name: 'Abhinandan',
@@ -30,8 +31,117 @@ export const NAVIGATION_ITEMS = [
       { label: 'OpsLensAI', path: '/projects/opslensai' },
     ]
   },
+  { label: 'Activity', path: '/activity' },
   { label: 'Resume', path: '/resume' },
   { label: 'Contact', path: '/contact' },
+];
+
+export const ACTIVITIES: ActivityItem[] = [
+  {
+    id: '15',
+    title: 'DevFest Bengaluru 2025',
+    category: 'Community',
+    date: 'DEC 2025',
+    summary: 'Attended DevFest Bengaluru 2025, a premier Google Developer Groups tech conference focused on scalable solutions, AI, cloud, and developer tools, enabling community engagement and exposure to industry practices.'
+  },
+  {
+    id: '14',
+    title: 'Publication – Automated File Classification via WhatsApp Bot',
+    category: 'Recognition',
+    date: 'DEC 2025',
+    summary: 'Published a research journal on an automated file classification system using a WhatsApp bot, demonstrating applied research and real-world automation problem solving.'
+  },
+  {
+    id: '13',
+    title: 'Gemini-CLI Demo – Student Workshop',
+    category: 'Technical',
+    date: 'DEC 2025',
+    summary: 'Conducted a hands-on demo of Gemini-CLI for students at ATME College of Engineering, explaining its usage, workflows, and practical tips.'
+  },
+  {
+    id: '12',
+    title: 'Bengaluru Tech Summit 2025',
+    category: 'Community',
+    date: 'NOV 2025',
+    summary: 'Participated in Bengaluru Tech Summit 2025 — Asia’s largest tech and innovation summit — gaining insights into emerging technologies and connecting with pioneers in AI and industry.'
+  },
+  {
+    id: '11',
+    title: 'Techno Ayurveda ’25',
+    category: 'Community',
+    date: 'NOV 2025',
+    summary: 'Attended Techno Ayurveda ’25, exploring the intersection of technology and traditional health sciences, highlighting interdisciplinary curiosity.'
+  },
+  {
+    id: '10',
+    title: 'IEEE Mini Project Symposium – Volunteer',
+    category: 'Leadership',
+    date: 'OCT 2025',
+    summary: 'Volunteered at an IEEE mini project symposium, coordinating logistics and supporting student project showcases to facilitate community engagement.'
+  },
+  {
+    id: '9',
+    title: 'TechAvishkar 2.0 – Hackathon Volunteer',
+    category: 'Leadership',
+    date: 'MAR 2025',
+    summary: 'Contributed to the on-ground execution of a 24-hour inter-collegiate hackathon, coordinating logistics, participants, and timelines under IEEE collaboration.'
+  },
+  {
+    id: '8',
+    title: 'IEEE Student Intern – Computer Society Bangalore Chapter',
+    category: 'Leadership',
+    date: 'MAR 2025',
+    summary: 'Selected as a student intern under a structured IEEE mentorship program, contributing consistently over a six-month duration.'
+  },
+  {
+    id: '7',
+    title: 'IAMPRO’25 Internship Completion',
+    category: 'Leadership',
+    date: 'FEB 2025',
+    summary: 'Completed a long-term mentorship-driven internship focused on professional development, consistency, and community contribution.'
+  },
+  {
+    id: '6',
+    title: 'Engineering Through the Eyes of a Disengaged Learner',
+    category: 'Speaking',
+    date: 'FEB 2025',
+    summary: 'Delivered a reflective session examining engineering education from a learner’s perspective, focusing on disengagement, systems, and reform.'
+  },
+  {
+    id: '5',
+    title: 'Legal Verdict Prediction Model – Output Layer Improvement',
+    category: 'Technical',
+    date: 'FEB 2025',
+    summary: 'Improved the output reasoning layer of a fine-tuned legal AI model, increasing reliability and prediction confidence in real-world case analysis.'
+  },
+  {
+    id: '4',
+    title: 'Secretary – IEEE Student Branch, ATME',
+    category: 'Leadership',
+    date: 'JAN 2025',
+    summary: 'Appointed as Secretary of the IEEE Student Branch, handling coordination, documentation, and institutional communication.'
+  },
+  {
+    id: '3',
+    title: 'IEEE Region 10 Student Summit',
+    category: 'Service',
+    date: 'DEC 2024',
+    summary: 'Participated in a regional IEEE student summit, engaging with peers, professionals, and cross-institutional technical discussions.'
+  },
+  {
+    id: '2',
+    title: 'Computer Awareness Outreach',
+    category: 'Service',
+    date: 'NOV 2024',
+    summary: 'Contributed to IEEE-led digital literacy outreach programs aimed at improving computer awareness among government school students.'
+  },
+  {
+    id: '1',
+    title: 'NPTEL Silver Medal – Joy of Computing Using Python',
+    category: 'Recognition',
+    date: 'OCT 2024',
+    summary: 'Earned Elite + Silver certification in a national-level NPTEL course, demonstrating strong fundamentals and academic discipline.'
+  }
 ];
 
 export const PROJECTS: Project[] = [
@@ -176,12 +286,15 @@ export const DOC_SECTIONS: Record<string, DocEntry> = {
     date: '2026-02-15',
     content: `
 ### 1. Boring is Better
+
 I prefer boring technologies. They fail in predictable ways. Innovation should be spent on the domain problem, not the infrastructure, unless the infrastructure *is* the problem. This "boring" foundation keeps the work exciting because it actually ships.
 
 ### 2. Knowledge Redistribution (Teaching)
+
 I am passionate about public speaking and sharing knowledge. I believe that if you cannot explain a concept simply on stage (like I did with **Gemini-CLI**), you do not understand it well enough.
 
 ### 3. Documentation as Code
+
 If it isn't documented, it doesn't exist. I love documenting everything. Systems degrade when the mental model of the maintainer diverges from the reality of the code.
     `
   },
@@ -195,6 +308,7 @@ My approach to system design centers on **observability first**.
 I admit I am not a database wizard—I focus on **application logic** and **user outcomes**. I prefer to work with my laptop, building interfaces and automations, rather than wrestling with physical infrastructure.
 
 I tend to favor:
+
 - **Event-Driven Architectures** for decoupling services.
 - **Actionable Logs** (See OpsLensAI).
 - **Fail-Fast** mechanisms to prevent cascading failures.
@@ -206,9 +320,11 @@ I tend to favor:
     date: '2024-01-15',
     content: `
 ### Passion over Trends
+
 I don't run behind trends; I do what I am passionate about. 
 
 I use a simple heuristic: **Type 1 vs. Type 2 Decisions**.
+
 - **Type 1 (Irreversible)**: Take time, write a Request for Comment (RFC), prototype.
 - **Type 2 (Reversible)**: Decide fast, execute, iterate.
 
@@ -231,6 +347,7 @@ The Year of Deployment. Deployed multiple full-stack websites. Realized that cod
 **2025**
 
 The Year of Expression.
+
 - Participated in **Code-Battle 2k25** Hackathon.
 - Published a journal on *"Automated file classification and notes sharing using Whatsapp Bot"* (n8n project).
 - Delivered a live demo on **Gemini-CLI** (combining my love for CLI tools and public speaking).

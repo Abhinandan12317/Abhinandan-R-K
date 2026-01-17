@@ -10,8 +10,6 @@ const Resume = () => {
         <a 
           href={PERSONAL_DETAILS.resumePdf}
           download
-          rel="noopener noreferrer"
-          target="_blank"
           className="flex items-center gap-2 text-sm text-ink border border-border px-4 py-2 hover:bg-black/5 transition-colors"
         >
           <Download size={14} />
@@ -131,8 +129,6 @@ const Resume = () => {
              <a 
                href={PERSONAL_DETAILS.resumePdf}
                download
-               rel="noopener noreferrer"
-               target="_blank"
                className="bg-ink text-white px-6 py-2 text-sm hover:bg-subtle transition-colors"
              >
                Get Full Resume

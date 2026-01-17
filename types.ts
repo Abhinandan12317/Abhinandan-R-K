@@ -1,3 +1,4 @@
+
 export enum ProjectSectionType {
   PROBLEM = 'Problem',
   CONTEXT = 'Context & Constraints',
@@ -34,4 +35,14 @@ export interface NavigationItem {
   path: string;
   isFolder?: boolean;
   children?: NavigationItem[];
+}
+
+export type ActivityCategory = 'Technical' | 'Leadership' | 'Speaking' | 'Service' | 'Recognition' | 'Community';
+
+export interface ActivityItem {
+  id: string;
+  title: string;
+  category: ActivityCategory;
+  date: string;
+  summary: string;
 }
