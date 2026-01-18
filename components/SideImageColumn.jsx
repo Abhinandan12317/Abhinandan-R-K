@@ -26,20 +26,34 @@ const SideImageColumn = () => {
     const container = containerRef.current;
     if (!container) return;
 
-    let start;
     let frame;
-    const totalHeight = container.scrollHeight;
+    let lastTimestamp = null;
+    let scrollY = 0;
+    const totalHeight = container.scrollHeight / 2; // Only scroll through one set of images
+    const speed = totalHeight / (LOOP_DURATION / 1000); // px per second
+
+    // Duplicate images for seamless loop
+    container.appendChild(container.firstChild.cloneNode(true));
+
     const animate = (timestamp) => {
-      if (!start) start = timestamp;
-      const elapsed = (timestamp - start) % LOOP_DURATION;
-      // Calculate scroll position (from bottom to top)
-      const progress = elapsed / LOOP_DURATION;
-      const scrollY = totalHeight * progress;
+      if (!lastTimestamp) lastTimestamp = timestamp;
+      const delta = (timestamp - lastTimestamp) / 1000; // seconds
+      lastTimestamp = timestamp;
+      scrollY += speed * delta;
+      if (scrollY >= totalHeight) {
+        scrollY = 0;
+      }
       container.style.transform = `translateY(-${scrollY}px)`;
       frame = requestAnimationFrame(animate);
     };
     frame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(frame);
+      // Remove duplicate node if present
+      if (container.childNodes.length > IMAGE_FILENAMES.length + 1) {
+        container.removeChild(container.lastChild);
+      }
+    };
   }, [isReducedMotion]);
 
   // Only show on desktop
