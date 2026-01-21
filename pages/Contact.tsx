@@ -10,7 +10,8 @@ declare global {
 }
 
 import React, { useState, useEffect } from 'react';
-import emailjs from 'emailjs-com';
+// @ts-ignore: emailjs/browser may not have types installed
+import emailjs from '@emailjs/browser';
 import { Send, Terminal, Mail, Linkedin, Copy, Radio, Zap, Activity } from 'lucide-react';
 import PageNavigation from '../components/PageNavigation';
 
