@@ -1,7 +1,19 @@
+// Fix for Vite env types
+declare global {
+  interface ImportMeta {
+    env: {
+      VITE_EMAILJS_SERVICE_ID: string;
+      VITE_EMAILJS_TEMPLATE_ID: string;
+      VITE_EMAILJS_USER_ID: string;
+    };
+  }
+}
 
 import React, { useState, useEffect } from 'react';
+import emailjs from 'emailjs-com';
 import { Send, Terminal, Mail, Linkedin, Copy, Radio, Zap, Activity } from 'lucide-react';
 import PageNavigation from '../components/PageNavigation';
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -31,23 +43,39 @@ const Contact = () => {
     setTerminalLogs(prev => [...prev, `> ${log}`]);
   };
 
+  const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const USER_ID = import.meta.env.VITE_EMAILJS_USER_ID;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('transmitting');
     setTerminalLogs([]);
 
-    // Simulate Terminal Sequence
     setTimeout(() => addLog("Initializing secure handshake..."), 100);
     setTimeout(() => addLog("Packetizing message payload..."), 600);
     setTimeout(() => addLog("Resolving mail client protocol..."), 1200);
     setTimeout(() => {
       addLog("Transmitting data...");
-      
-      const subject = encodeURIComponent(`[Portfolio Contact] ${formData.subject}`);
-      const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
-      
-      window.location.href = `mailto:${myEmail}?subject=${subject}&body=${body}`;
-      setStatus('sent');
+      emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        USER_ID
+      )
+      .then(() => {
+        addLog("Message sent successfully!");
+        setStatus('sent');
+      })
+      .catch(() => {
+        addLog("Failed to send message. Please try again later.");
+        setStatus('idle');
+      });
     }, 2000);
   };
 

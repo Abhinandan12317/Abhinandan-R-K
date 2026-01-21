@@ -1,20 +1,7 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+## About Me
 
-# Run and deploy your AI Studio app
+I am a passionate and dedicated DevOps and Fullstack Engineering student  with a strong background in building modern web applications using React, TypeScript, and related technologies. My portfolio showcases a range of projects that demonstrate my expertise in front-end development, UI/UX design, and problem-solving. I thrive on creating intuitive user experiences and enjoy collaborating with others to bring innovative ideas to life.
 
-This contains everything you need to run your app locally.
+With a solid foundation in computer science and hands-on experience across various domains, I am committed to continuous learning and professional growth. My resume reflects a track record of successful project delivery, effective communication, and adaptability in fast-paced environments. I am always eager to take on new challenges and contribute to impactful projects.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1htq9HOcuGXg4RJ2I7eosvwZdhYPNItwX
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Feel free to explore my work and reach out if you’d like to connect or collaborate!
