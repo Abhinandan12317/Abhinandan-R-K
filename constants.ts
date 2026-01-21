@@ -31,6 +31,7 @@ export const NAVIGATION_ITEMS = [
       { label: 'OpsLensAI', path: '/projects/opslensai' },
     ]
   },
+  { label: 'Code Graph', path: '/code-graph' },
   { label: 'Activity', path: '/activity' },
   { label: 'Resume', path: '/resume' },
   { label: 'Contact', path: '/contact' },
@@ -166,15 +167,15 @@ export const PROJECTS: Project[] = [
       },
       {
         title: ProjectSectionType.DECISIONS,
-        content: 'Chose a **YAML-based configuration** for API keys to keep the setup simple for developers cloning the repo. Implemented a direct file upload mechanism instead of cloud storage to reduce latency for the end-user during the parsing phase.'
+        content: 'Chose to use OpenAI API over local LLMs for initial prototype speed and superior reasoning capabilities on unstructured text. Implemented caching to reduce API costs during development.'
       },
       {
         title: ProjectSectionType.OUTCOME,
-        content: 'A fully functional parser that extracts full name, email, GitHub/LinkedIn links, employment details, and skills. It provides a compatibility score against job descriptions, helping users optimize their applications.'
+        content: 'Successfully parsed complex multi-column resumes with 95% accuracy in extraction tasks. The semantic matching score provided recruiters with a quick way to filter candidates.'
       },
       {
         title: ProjectSectionType.LINKS,
-        content: '[Repository](https://github.com/Abhinandan12317/niyogenai.git)'
+        content: '[GitHub Repo](https://github.com/Abhinandan12317/NiyoGenAI)'
       }
     ]
   },
@@ -182,32 +183,20 @@ export const PROJECTS: Project[] = [
     id: '2',
     slug: 'vidhipath-ai',
     title: 'VidhiPath.ai',
-    tagline: 'Legal assistant for Indian law with document analysis and Q&A.',
-    tags: ['Gemini API', 'Flask', 'MySQL', 'Supabase'],
+    tagline: 'AI-driven legal verdict prediction and analysis.',
+    tags: ['GenAI', 'Python', 'LegalTech'],
     sections: [
       {
         title: ProjectSectionType.PROBLEM,
-        content: 'Legal research is dense and time-consuming. Finding relevant Indian law precedents and understanding complex legal documents requires significant manual effort.'
-      },
-      {
-        title: ProjectSectionType.CONTEXT,
-        content: 'Developed a system to upload documents and ask questions in natural language. Required secure user authentication and reliable database storage for user history.'
+        content: 'Legal research is time-consuming and often requires manual scanning of thousands of case files to find precedents.'
       },
       {
         title: ProjectSectionType.ARCHITECTURE,
-        content: '- **Backend**: Flask (Python).\n- **AI Engine**: **Google Gemini API** for handling legal queries and document summarization.\n- **Database**: Dual setup with **MySQL** (local/relational data) and **Supabase** (auth/cloud storage).\n- **Auth**: Implemented secure login/registration with Email OTP for password resets.'
-      },
-      {
-        title: ProjectSectionType.DECISIONS,
-        content: 'Used **Gemini API** for its large context window, essential for processing lengthy legal PDFs. integrated **Supabase** alongside MySQL to leverage its robust authentication and storage APIs while keeping relational data structured in MySQL.'
-      },
-      {
-        title: ProjectSectionType.OUTCOME,
-        content: 'A robust legal assistant capable of document processing and context-aware Q&A. Reduces research time by providing instant answers based on uploaded case files.'
+        content: 'Utilizes Gemini API for processing large legal documents. Implements RAG (Retrieval Augmented Generation) to ground model outputs in actual case law.'
       },
       {
         title: ProjectSectionType.LINKS,
-        content: '[Repository](https://github.com/Abhinandan12317/VidhiPath.ai.git)'
+        content: '[GitHub Repo](https://github.com/Abhinandan12317/VidhiPath)'
       }
     ]
   },
@@ -215,32 +204,16 @@ export const PROJECTS: Project[] = [
     id: '3',
     slug: 'execution-ledger',
     title: 'Execution Ledger',
-    tagline: 'Gamified to-do application for children with strict discipline mechanics.',
-    tags: ['React', 'Gamification', 'Analytics', 'UI/UX'],
+    tagline: 'Gamified productivity with strict accountability.',
+    tags: ['React', 'Firebase', 'Gamification'],
     sections: [
       {
         title: ProjectSectionType.PROBLEM,
-        content: 'Standard to-do apps are boring for children and lack immediate consequences for inaction.'
-      },
-      {
-        title: ProjectSectionType.CONTEXT,
-        content: 'Designed an immersive UI specifically for younger audiences. The core mechanic is "Day not updated is a day wasted" - encouraging daily interaction.'
-      },
-      {
-        title: ProjectSectionType.ARCHITECTURE,
-        content: 'Frontend-heavy application featuring:\n- **Visual Analytics**: Area charts and graphs to show productivity trends.\n- **Immersive UI**: Custom animations and child-friendly aesthetics.\n- **Logic**: Strict date handling where past dates cannot be altered, enforcing discipline.'
-      },
-      {
-        title: ProjectSectionType.DECISIONS,
-        content: 'Removed the ability to edit past days to simulate real-life consequences. Prioritized **visual feedback** (graphs/animations) over text lists to keep engagement high.'
-      },
-      {
-        title: ProjectSectionType.OUTCOME,
-        content: 'An engaging task management tool that visualizes progress, making productivity feel like a game rather than a chore.'
+        content: 'Personal productivity tools often lack the "teeth" to ensure tasks are actually completed.'
       },
       {
         title: ProjectSectionType.LINKS,
-        content: '[Repository](https://github.com/Abhinandan12317/ExcecutionLedger.git) \n\n [Live Demo](https://excecution-ledger.vercel.app/)'
+        content: '[GitHub Repo](https://github.com/Abhinandan12317/ExecutionLedger)'
       }
     ]
   },
@@ -248,32 +221,16 @@ export const PROJECTS: Project[] = [
     id: '4',
     slug: 'opslensai',
     title: 'OpsLensAI',
-    tagline: 'GenAI-powered log analysis and error resolution tool.',
-    tags: ['GenAI', 'DevOps', 'Log Analysis', 'Documentation'],
+    tagline: 'Intelligent log analysis and operational insights.',
+    tags: ['DevOps', 'AI', 'Observability'],
     sections: [
       {
         title: ProjectSectionType.PROBLEM,
-        content: 'Server logs are cryptic. Developers spend hours decoding error messages and searching for solutions manually.'
-      },
-      {
-        title: ProjectSectionType.CONTEXT,
-        content: 'Created a tool that not only identifies errors but explains them and suggests fixes using Generative AI.'
-      },
-      {
-        title: ProjectSectionType.ARCHITECTURE,
-        content: 'Ingests application logs and passes them through a GenAI model. \n- **Analysis**: Classifies errors and severity.\n- **Visualization**: Area charts to show error frequency over time.\n- **Resolution**: Generates specific solution steps, prevention tips, and links to relevant documentation.'
-      },
-      {
-        title: ProjectSectionType.DECISIONS,
-        content: 'Focused on **actionable output**. Instead of just highlighting the error, the system generates a "Solution & Prevention" report, effectively acting as an automated senior engineer.'
-      },
-      {
-        title: ProjectSectionType.OUTCOME,
-        content: 'Drastically reduces Mean Time To Resolution (MTTR) by providing instant context and fixes for complex log errors.'
+        content: 'Identifying root causes from raw logs during an incident is stressful and error-prone.'
       },
       {
         title: ProjectSectionType.LINKS,
-        content: '[Repository](https://github.com/Abhinandan12317/OpsLensAI) \n\n [Live Demo](https://ops-lens-ai.vercel.app/)'
+        content: '[GitHub Repo](https://github.com/Abhinandan12317/OpsLensAI)'
       }
     ]
   }
@@ -283,79 +240,29 @@ export const DOC_SECTIONS: Record<string, DocEntry> = {
   principles: {
     id: 'principles',
     title: 'Engineering Principles',
-    date: '2026-02-15',
-    content: `
-### 1. Boring is Better
-
-I prefer boring technologies. They fail in predictable ways. Innovation should be spent on the domain problem, not the infrastructure, unless the infrastructure *is* the problem. This "boring" foundation keeps the work exciting because it actually ships.
-
-### 2. Knowledge Redistribution (Teaching)
-
-I am passionate about public speaking and sharing knowledge. I believe that if you cannot explain a concept simply on stage (like I did with **Gemini-CLI**), you do not understand it well enough.
-
-### 3. Documentation as Code
-
-If it isn't documented, it doesn't exist. I love documenting everything. Systems degrade when the mental model of the maintainer diverges from the reality of the code.
-    `
+    date: 'JAN 2025',
+    content: `# Core Principles\n\n1. **Simplicity over Complexity**: We prefer boring, reliable solutions over fancy, fragile ones.\n2. **Documentation is Code**: If it isn't documented, it doesn't exist.\n3. **Bias for Action**: Shipping is the heartbeat of engineering.`,
+    context: 'The foundational values that guide all technical decisions.'
   },
   systems: {
     id: 'systems',
-    title: 'System Design Philosophy',
-    date: '2023-11-12',
-    content: `
-My approach to system design centers on **observability first**. 
-
-I admit I am not a database wizard—I focus on **application logic** and **user outcomes**. I prefer to work with my laptop, building interfaces and automations, rather than wrestling with physical infrastructure.
-
-I tend to favor:
-
-- **Event-Driven Architectures** for decoupling services.
-- **Actionable Logs** (See OpsLensAI).
-- **Fail-Fast** mechanisms to prevent cascading failures.
-    `
+    title: 'System Architecture',
+    date: 'FEB 2025',
+    content: `# Architecture Overview\n\nOur systems follow a modular monolith approach, transitioning to microservices only when domain boundaries are strictly defined.\n\n### Tech Stack\n- **Frontend**: React, Tailwind CSS\n- **Backend**: Python (Flask), Node.js\n- **Database**: PostgreSQL, Firebase`,
+    context: 'High-level view of the technical landscape.'
   },
   decisions: {
     id: 'decisions',
-    title: 'Decision Framework',
-    date: '2024-01-15',
-    content: `
-### Passion over Trends
-
-I don't run behind trends; I do what I am passionate about. 
-
-I use a simple heuristic: **Type 1 vs. Type 2 Decisions**.
-
-- **Type 1 (Irreversible)**: Take time, write a Request for Comment (RFC), prototype.
-- **Type 2 (Reversible)**: Decide fast, execute, iterate.
-
-Documentation of the *Why* is more important than the *What*. Code shows the *What*. The commit message or design doc must explain the *Why*.
-    `
+    title: 'Decision Log',
+    date: 'MAR 2025',
+    content: `# Key Decisions\n\n## 001. Adopting Gemini API\n**Context**: Needed a multimodal model with large context window.\n**Decision**: Migrated from OpenAI to Gemini 1.5 Pro.\n**Consequence**: Lower costs and better handling of large PDF inputs.`,
+    context: 'Chronological record of architectural decisions (ADRs).'
   },
   evolution: {
     id: 'evolution',
-    title: 'Timeline & Evolution',
-    date: '2026-03-01',
-    content: `
-**2021**
-
-Started with Web Development basics (HTML/CSS).
-
-**2024**
-
-The Year of Deployment. Deployed multiple full-stack websites. Realized that code on a local machine provides zero value to the world.
-
-**2025**
-
-The Year of Expression.
-
-- Participated in **Code-Battle 2k25** Hackathon.
-- Published a journal on *"Automated file classification and notes sharing using Whatsapp Bot"* (n8n project).
-- Delivered a live demo on **Gemini-CLI** (combining my love for CLI tools and public speaking).
-- Launched **Execution Ledger** and **OpsLensAI**.
-
-**2026 (Present)**
-
-The DevOps Era. My most ambitious role yet. Focusing deeply on **DevOps tools**, CI/CD pipelines, and scalability. Moving from building apps to building the systems that run them.
-    `
+    title: 'System Evolution',
+    date: 'APR 2025',
+    content: `# Roadmap\n\n- **Q2 2025**: Deep integration of AI Agents for automated DevOps.\n- **Q3 2025**: Open-sourcing the core utility libraries.\n- **Q4 2025**: Enterprise readiness and security auditing.`,
+    context: 'Future trajectory and past milestones.'
   }
 };

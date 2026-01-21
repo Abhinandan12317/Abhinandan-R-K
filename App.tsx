@@ -1,29 +1,25 @@
+
 import React, { useState } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import MobileNav from './components/MobileNav';
-import SideImageColumn from './components/SideImageColumn';
 import Overview from './pages/Overview';
 import ProjectDetail from './pages/ProjectDetail';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
 import Documentation from './pages/Documentation';
 import Activity from './pages/Activity';
+import CodeGraph from './pages/CodeGraph';
+import ScrollToTop from './components/ScrollToTop';
 
 // Layout wrapper component
 const Layout = ({ children }: { children?: React.ReactNode }) => {
   const [easterEgg, setEasterEgg] = useState(false);
-  const location = useLocation();
-
-  React.useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-  }, [location.pathname]);
 
   return (
     <div className="min-h-screen bg-paper text-ink font-sans selection:bg-accent/20">
       <Sidebar />
       <MobileNav />
-      <SideImageColumn />
       <main className="md:ml-64 min-h-screen">
         <div className="max-w-5xl mx-auto px-6 py-20 md:py-24">
           {children}
@@ -55,6 +51,7 @@ const Layout = ({ children }: { children?: React.ReactNode }) => {
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Layout>
         <Routes>
           <Route path="/" element={<Overview />} />
@@ -63,6 +60,7 @@ const App = () => {
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/documentation/:slug" element={<Documentation />} />
           <Route path="/activity" element={<Activity />} />
+          <Route path="/code-graph" element={<CodeGraph />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

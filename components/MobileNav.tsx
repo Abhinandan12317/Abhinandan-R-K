@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -14,14 +15,14 @@ const MobileNav = () => {
   return (
     <div className="md:hidden">
       <div className="fixed top-0 left-0 right-0 h-14 bg-paper border-b border-border flex items-center justify-between px-4 z-50">
-        <span className="font-serif font-bold text-ink">Dev_Docs</span>
+        <span className="font-serif font-bold text-ink">Abhinandan</span>
         <button onClick={() => setIsOpen(!isOpen)} className="text-ink p-1">
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 top-14 bg-paper z-40 p-6 overflow-y-auto">
+        <div className="fixed inset-0 top-14 bg-paper z-40 p-6 overflow-y-auto animate-fade-in">
           {NAVIGATION_ITEMS.map((item) => (
             <div key={item.path} className="mb-6">
               {item.isFolder ? (

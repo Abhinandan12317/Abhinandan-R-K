@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +10,7 @@
       name="description"
       content="Technical documentation of systems and architecture."
     />
-    <title>Abhinandan's Portfolio</title>
+    <title>System Documentation</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -28,6 +29,26 @@
               sans: ['Inter', 'system-ui', 'sans-serif'],
               mono: ['"JetBrains Mono"', 'Menlo', 'monospace'],
             },
+            animation: {
+              'fade-in': 'fadeIn 0.6s ease-out forwards',
+              'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+              'slide-in-right': 'slideInRight 0.6s ease-out forwards',
+              'spin-slow': 'spin 3s linear infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              slideInRight: {
+                '0%': { opacity: '0', transform: 'translateX(20px)' },
+                '100%': { opacity: '1', transform: 'translateX(0)' },
+              }
+            }
           },
         },
       }

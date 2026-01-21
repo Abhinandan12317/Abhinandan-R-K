@@ -28,6 +28,8 @@ export interface DocEntry {
   title: string;
   content: string;
   date: string;
+  context?: string;
+  relatedDocIds?: string[];
 }
 
 export interface NavigationItem {

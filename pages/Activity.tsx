@@ -2,7 +2,8 @@
 import React, { useMemo, useState } from 'react';
 import { ACTIVITIES } from '../constants';
 import { ActivityItem } from '../types';
-import { Code, Flag, Mic, Heart, Award, Users, Circle } from 'lucide-react';
+import { Code, Flag, Mic, Heart, Award, Users, Circle, Filter } from 'lucide-react';
+import PageNavigation from '../components/PageNavigation';
 
 interface ActivityGraphProps {
   activities: ActivityItem[];
@@ -135,7 +136,7 @@ const ActivityGraph = ({ activities }: ActivityGraphProps) => {
   const areaPathString = `${linePathString} L ${width},${height} L 0,${height} Z`;
 
   return (
-    <div className="mt-20 pt-12 border-t border-border select-none">
+    <div className="mt-20 pt-12 border-t border-border select-none animate-fade-in-up delay-200">
       <div className="flex items-center justify-between mb-8">
         <h2 className="font-mono text-xs text-subtle uppercase tracking-wider">Activity Intensity (Quarterly)</h2>
         <div className="h-4">
@@ -221,16 +222,15 @@ const ActivityGraph = ({ activities }: ActivityGraphProps) => {
 };
 
 // Helper for Category Icons
-// Updated to use a single unified color (text-accent) for better consistency
-const getCategoryIcon = (category: string) => {
-  const className = "text-accent"; 
+const getCategoryIcon = (category: string, className?: string) => {
+  const cls = className || "text-accent"; 
   switch (category) {
-    case 'Technical': return <Code size={12} className={className} />;
-    case 'Leadership': return <Flag size={12} className={className} />;
-    case 'Speaking': return <Mic size={12} className={className} />;
-    case 'Service': return <Heart size={12} className={className} />;
-    case 'Recognition': return <Award size={12} className={className} />;
-    case 'Community': return <Users size={12} className={className} />;
+    case 'Technical': return <Code size={12} className={cls} />;
+    case 'Leadership': return <Flag size={12} className={cls} />;
+    case 'Speaking': return <Mic size={12} className={cls} />;
+    case 'Service': return <Heart size={12} className={cls} />;
+    case 'Recognition': return <Award size={12} className={cls} />;
+    case 'Community': return <Users size={12} className={cls} />;
     default: return <Circle size={12} className="text-subtle" />;
   }
 };
@@ -248,7 +248,7 @@ const Activity = () => {
   return (
     <div className="max-w-3xl animate-fade-in pb-20">
       <header className="mb-8 border-b border-border pb-6">
-        <h1 className="text-3xl font-serif text-ink mb-2">Activity</h1>
+        <h1 className="text-3xl font-serif text-ink mb-2">Activity Log</h1>
         <p className="text-subtle font-sans max-w-xl leading-relaxed">
           A curated log of professional engagement and ecosystem participation. 
           Reflecting activity beyond the code.
@@ -256,30 +256,46 @@ const Activity = () => {
       </header>
 
       {/* Filter Bar */}
-      <div className="flex flex-wrap gap-2 mb-12">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setFilter(cat)}
-            className={`px-3 py-1 text-[11px] font-mono uppercase tracking-wider rounded-sm transition-all duration-200 flex items-center gap-2
-              ${filter === cat 
-                ? 'bg-accent text-white shadow-sm' 
-                : 'bg-black/5 text-subtle hover:bg-black/10 hover:text-ink'
-              }`}
-          >
-            {/* Show icon in filter too for better association */}
-            {cat !== 'All' && getCategoryIcon(cat)} 
-            {cat}
-          </button>
-        ))}
+      <div className="flex flex-wrap items-center gap-3 mb-12 animate-fade-in delay-100">
+         <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-subtle opacity-50 mr-2 select-none">
+            <Filter size={12} />
+            <span>Filter</span>
+        </div>
+        {categories.map((cat) => {
+           const isActive = filter === cat;
+           const count = cat === 'All' ? ACTIVITIES.length : ACTIVITIES.filter(a => a.category === cat).length;
+           
+           return (
+            <button
+              key={cat}
+              onClick={() => setFilter(cat)}
+              className={`px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider rounded-sm border transition-all duration-200 flex items-center gap-2
+                ${isActive 
+                  ? 'bg-ink text-white border-ink shadow-sm translate-y-px' 
+                  : 'bg-white text-subtle border-border hover:border-accent hover:text-ink hover:bg-paper'
+                }`}
+            >
+              {isActive && <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>}
+              
+              {cat !== 'All' && getCategoryIcon(cat, isActive ? 'text-white' : 'text-accent')} 
+              
+              {cat}
+              
+              <span className={`ml-0.5 text-[9px] font-normal ${isActive ? 'text-white/60' : 'text-subtle/40'}`}>
+                  {count}
+              </span>
+            </button>
+           );
+        })}
       </div>
 
-      <div className="space-y-0 min-h-[300px]">
+      <div key={filter} className="space-y-0 min-h-[300px] animate-fade-in-up">
         {filteredActivities.length > 0 ? (
-          filteredActivities.map((activity) => (
+          filteredActivities.map((activity, idx) => (
             <div 
               key={activity.id} 
               className="group flex flex-col md:flex-row gap-4 md:gap-12 py-8 border-b border-border/40 hover:bg-black/[0.02] transition-colors -mx-4 px-4 rounded-sm"
+              style={{ animationDelay: `${idx * 50}ms` }}
             >
               {/* Left Column: Date */}
               <div className="md:w-32 flex-shrink-0 pt-1">
@@ -316,9 +332,11 @@ const Activity = () => {
 
       <ActivityGraph activities={filteredActivities} />
       
-      <div className="mt-12 pt-4 text-center">
+      <div className="mt-12 mb-8 pt-4 text-center">
         <span className="font-mono text-xs text-subtle opacity-50">END OF LOG</span>
       </div>
+
+      <PageNavigation />
     </div>
   );
 };

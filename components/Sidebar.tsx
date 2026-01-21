@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { NAVIGATION_ITEMS, PERSONAL_DETAILS } from '../constants';
-import { Folder, FileText, Disc, Terminal, Activity, Settings, ShieldAlert, Eye, Moon, Zap, Power } from 'lucide-react';
+import { Folder, FileText, Disc, Terminal, Activity, Settings, ShieldAlert, Eye, Moon, Zap, Power, Code } from 'lucide-react';
 
 const Sidebar = () => {
   const location = useLocation();
@@ -99,6 +99,7 @@ const Sidebar = () => {
              item.label === 'Contact' ? <Disc size={14} /> :
              item.label === 'Overview' ? <Terminal size={14} /> :
              item.label === 'Activity' ? <Activity size={14} /> :
+             item.label === 'Code Graph' ? <Code size={14} /> :
              <span className="w-3.5 h-3.5 flex items-center justify-center">
                 <span className={`w-1.5 h-1.5 rounded-full ${isExact ? 'bg-accent' : 'bg-subtle/50'}`}></span>
              </span>
@@ -124,7 +125,7 @@ const Sidebar = () => {
                <img 
                 src={PERSONAL_DETAILS.profilePicture}
                 alt="Profile" 
-                className="w-full h-full object-cover transition-all duration-500"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=Abhinandan&background=ffffff&color=1E1E1E&size=128';
                 }}
