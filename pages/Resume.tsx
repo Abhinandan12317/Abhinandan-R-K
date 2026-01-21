@@ -1,27 +1,150 @@
 
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Download } from 'lucide-react';
 import { PERSONAL_DETAILS } from '../constants';
 import PageNavigation from '../components/PageNavigation';
 
 const Resume = () => {
+  // Human verification state
+  const [showVerify, setShowVerify] = useState(false);
+  const [selected, setSelected] = useState<string | null>(null);
+  const [error, setError] = useState('');
+  const [verified, setVerified] = useState(false);
+  const [preparing, setPreparing] = useState(false);
+  const [pendingAction, setPendingAction] = useState<'download' | 'full' | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement>(null);
+  const options = [
+    'Flashy UI animations',
+    'Reliable systems & tools',
+    'Social media apps',
+  ];
+  const correct = 'Reliable systems & tools';
+
+  // Keyboard accessibility: focus modal when opened
+  const modalRef = useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    if (showVerify && modalRef.current) {
+      modalRef.current.focus();
+    }
+  }, [showVerify]);
+
+  // Handle option select
+  function handleSelect(option: string) {
+    setSelected(option);
+    setError('');
+  }
+
+  // Handle submit
+  function handleVerify(e?: React.FormEvent) {
+    if (e) e.preventDefault();
+    if (selected === correct) {
+      setPreparing(true);
+      setError('');
+      setTimeout(() => {
+        setPreparing(false);
+        setVerified(true);
+        setShowVerify(false);
+        // Trigger download for either button
+        setTimeout(() => {
+          downloadRef.current?.click();
+        }, 100);
+      }, 2500);
+    } else {
+      setError('Not quite. Take another look around.');
+    }
+  }
+
   return (
     <div className="max-w-3xl h-full flex flex-col animate-fade-in pb-20">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-serif text-ink">Resume</h1>
-        <a 
-          href={PERSONAL_DETAILS.resumePdf}
-          download
-          className="flex items-center gap-2 text-sm text-ink border border-border px-4 py-2 hover:bg-black/5 transition-colors rounded-sm"
+        <button
+          type="button"
+          className="flex items-center gap-2 text-sm text-ink border border-border px-4 py-2 hover:bg-black/5 transition-colors rounded-sm focus:outline-none focus:ring-2 focus:ring-accent/40"
+          onClick={() => { setShowVerify(true); setPendingAction('download'); }}
+          disabled={verified}
+          aria-haspopup="dialog"
+          aria-expanded={showVerify}
         >
           <Download size={14} />
           <span>Download PDF</span>
-        </a>
+        </button>
+        {/* Hidden anchor for download trigger */}
+        <a
+          href={PERSONAL_DETAILS.resumePdf}
+          download
+          ref={downloadRef}
+          style={{ display: 'none' }}
+          tabIndex={-1}
+        >Download</a>
       </div>
 
+      {/* Modal for human verification */}
+      {showVerify && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 transition-opacity animate-fade-in"
+          aria-modal="true"
+          role="dialog"
+        >
+          <div
+            ref={modalRef}
+            tabIndex={-1}
+            className="bg-white border border-border rounded-md shadow-lg p-6 w-full max-w-xs outline-none animate-fade-in"
+            style={{ minWidth: 280 }}
+            onKeyDown={e => {
+              if (e.key === 'Escape') setShowVerify(false);
+            }}
+          >
+            <form onSubmit={handleVerify}>
+              <div className="mb-4">
+                <div className="font-serif text-lg mb-1">One small thing before you download.</div>
+                <div className="text-sm text-ink mb-2">What do I mostly enjoy building?</div>
+                <fieldset>
+                  {options.map(option => (
+                    <label
+                      key={option}
+                      className={`block px-2 py-1 rounded transition-colors cursor-pointer mb-1 ${selected === option ? 'bg-accent/10 border border-accent' : 'hover:bg-black/5'}`}
+                    >
+                      <input
+                        type="radio"
+                        name="verify"
+                        value={option}
+                        checked={selected === option}
+                        onChange={() => handleSelect(option)}
+                        className="mr-2 align-middle"
+                        tabIndex={0}
+                      />
+                      {option}
+                    </label>
+                  ))}
+                </fieldset>
+              </div>
+              {error && (
+                <div className="text-xs text-ink/70 mb-2" style={{ opacity: 0.85 }}>{error}</div>
+              )}
+              <div className="flex justify-end gap-2 mt-2">
+                <button
+                  type="button"
+                  className="text-xs px-3 py-1 border border-border rounded hover:bg-black/5 transition-colors focus:outline-none"
+                  onClick={() => setShowVerify(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="text-xs px-3 py-1 border border-accent bg-accent/10 rounded hover:bg-accent/20 transition-colors focus:outline-none"
+                  disabled={!selected || preparing}
+                >
+                  {preparing ? 'Preparing file…' : 'Continue'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       <div className="relative border border-border bg-white p-8 md:p-12 shadow-sm flex-grow overflow-hidden animate-fade-in-up">
-        <div className="space-y-8 text-sm md:text-base text-ink font-sans">
-          
+        <div className="space-y-8 text-sm md:text-base text-ink font-sans" style={{ height: '50%', overflow: 'hidden', position: 'relative' }} aria-hidden={showVerify ? 'true' : undefined}>
           <header className="border-b border-black/10 pb-6 flex justify-between items-start">
             <div>
               <h2 className="text-3xl font-serif text-black mb-1">{PERSONAL_DETAILS.name}</h2>
@@ -29,18 +152,7 @@ const Resume = () => {
               <p className="text-xs text-subtle mt-2 font-mono">Kuvempunagar, Mysuru • ark45072@gmail.com • +91 9482053968</p>
               <p className="text-xs text-subtle mt-1 font-mono">LinkedIn: abhinandanrk</p>
             </div>
-            <div className="hidden md:block w-24 h-24 border border-border bg-paper p-1">
-                <img 
-                  src={PERSONAL_DETAILS.profilePicture} 
-                  alt="Profile" 
-                  className="w-full h-full object-cover grayscale"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=Abhinandan&background=F6F5F2&color=1E1E1E&size=128';
-                  }}
-                />
-            </div>
           </header>
-
           <section>
             <h3 className="font-bold text-black uppercase tracking-wider text-xs mb-4">Summary</h3>
             <p className="text-subtle text-sm leading-relaxed">
@@ -50,92 +162,23 @@ const Resume = () => {
               and sharing knowledge through journals and live technical demos.
             </p>
           </section>
-
-          <section>
-            <h3 className="font-bold text-black uppercase tracking-wider text-xs mb-4">Technical Skills</h3>
-             <div className="grid grid-cols-1 gap-y-2 text-sm text-subtle">
-                <p><strong className="text-ink">Languages:</strong> Python, C, JavaScript</p>
-                <p><strong className="text-ink">DevOps & Tools:</strong> Docker, Git, CI/CD, N8N, Gemini-CLI</p>
-                <p><strong className="text-ink">Web Development:</strong> React, Flask, REST APIs, HTML/CSS</p>
-                <p><strong className="text-ink">AI/ML:</strong> OpenAI API, Gemini API, TensorFlow, NLP</p>
-                <p><strong className="text-ink">Core Concepts:</strong> OOP, DSA, System Design</p>
-             </div>
-          </section>
-
-          <section>
-            <h3 className="font-bold text-black uppercase tracking-wider text-xs mb-4">Professional Experience & Projects</h3>
-            <div className="space-y-6">
-              <div>
-                <div className="flex justify-between mb-1">
-                  <span className="font-bold">OpsLensAI & Execution Ledger (Live Deployments)</span>
-                  <span className="text-subtle font-mono text-xs">2025</span>
-                </div>
-                <ul className="list-disc list-inside text-subtle text-sm leading-relaxed marker:text-gray-300">
-                  <li>Deployed **OpsLensAI**: A GenAI-powered log analysis tool reducing MTTR for developers.</li>
-                  <li>Deployed **Execution Ledger**: A gamified productivity app with strict discipline mechanics.</li>
-                </ul>
-              </div>
-              <div>
-                <div className="flex justify-between mb-1">
-                  <span className="font-bold">Legal AI Companion – Verdict Prediction System</span>
-                  <span className="text-subtle font-mono text-xs">Feb 2025 – Present</span>
-                </div>
-                <ul className="list-disc list-inside text-subtle text-sm leading-relaxed marker:text-gray-300">
-                  <li>Engineered a legal AI tool leveraging Gemini API to predict court verdicts with 78% accuracy.</li>
-                  <li>Implemented API-driven inference and index-based data management.</li>
-                </ul>
-              </div>
-               <div>
-                <div className="flex justify-between mb-1">
-                  <span className="font-bold">AI Resume Compatibility Analyzer</span>
-                  <span className="text-subtle font-mono text-xs">Mar 2025</span>
-                </div>
-                <p className="text-xs text-accent mb-1 font-medium">Hackathon Finalist Project</p>
-                <ul className="list-disc list-inside text-subtle text-sm leading-relaxed marker:text-gray-300">
-                  <li>Processed over 10,000 resumes reducing screening time by 40% using NLP-based ranking.</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h3 className="font-bold text-black uppercase tracking-wider text-xs mb-4">Education</h3>
-             <div className="space-y-4">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <span className="font-bold block text-sm">B.E IN CSE</span>
-                    <span className="text-subtle text-sm">ATME College of Engineering, Mysuru</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-subtle font-mono text-xs block">2023 – Present</span>
-                    <span className="text-ink text-xs font-medium">CGPA: 8.53</span>
-                  </div>
-                </div>
-              </div>
-          </section>
-
-          <section>
-            <h3 className="font-bold text-black uppercase tracking-wider text-xs mb-4">Achievements & Leadership</h3>
-             <ul className="list-disc list-inside text-subtle text-sm leading-relaxed marker:text-gray-300">
-               <li>**Publication (2025)**: Published journal on "Automated file classification and notes sharing using Whatsapp Bot" (N8N Project).</li>
-               <li>**Speaker (2025)**: Delivered a live technical demo on **Gemini-CLI** at a tech event.</li>
-               <li>**Hackathon Finalist**: Code-Battle 2k25 Participant & Resume Analyzer Project.</li>
-               <li>**IEEE Student Branch Secretary**: Organized tech workshops and events (2023-Present).</li>
-             </ul>
-          </section>
         </div>
-
         {/* Fade Out Effect */}
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white via-white/90 to-transparent flex items-end justify-center pb-8">
-           <div className="text-center">
-             <a 
-               href={PERSONAL_DETAILS.resumePdf}
-               download
-               className="bg-ink text-white px-6 py-2 text-sm hover:bg-subtle transition-colors shadow-lg"
-             >
-               Get Full Resume
-             </a>
-           </div>
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white via-white/90 to-transparent flex items-end justify-center pb-8 pointer-events-none select-none">
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 flex items-end justify-center pb-8">
+          <div className="text-center">
+            <button
+              type="button"
+              className="bg-ink text-white px-6 py-2 text-sm hover:bg-subtle transition-colors shadow-lg rounded focus:outline-none focus:ring-2 focus:ring-accent/40"
+              onClick={() => { setShowVerify(true); setPendingAction('full'); }}
+              disabled={verified}
+              aria-haspopup="dialog"
+              aria-expanded={showVerify}
+            >
+              Get Full Resume
+            </button>
+          </div>
         </div>
       </div>
 
