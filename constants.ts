@@ -9,8 +9,8 @@ export const PERSONAL_DETAILS = {
 
 export const NAVIGATION_ITEMS = [
   { label: 'Overview', path: '/' },
-  { 
-    label: 'Documentation', 
+  {
+    label: 'Documentation',
     path: '/documentation',
     isFolder: true,
     children: [
@@ -213,7 +213,7 @@ export const PROJECTS: Project[] = [
       },
       {
         title: ProjectSectionType.LINKS,
-        content: '[GitHub Repo](https://github.com/Abhinandan12317/ExecutionLedger)'
+        content: '[Live Demo](https://excecution-ledger.vercel.app/) [GitHub Repo](https://github.com/Abhinandan12317/ExecutionLedger)'
       }
     ]
   },
@@ -230,7 +230,7 @@ export const PROJECTS: Project[] = [
       },
       {
         title: ProjectSectionType.LINKS,
-        content: '[GitHub Repo](https://github.com/Abhinandan12317/OpsLensAI)'
+        content: '[Live Demo](https://ops-lens-ai.vercel.app/) [GitHub Repo](https://github.com/Abhinandan12317/OpsLensAI)'
       }
     ]
   }

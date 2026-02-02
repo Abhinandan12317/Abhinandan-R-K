@@ -34,7 +34,7 @@ const ProjectDetail = () => {
 
   return (
     <div className="max-w-6xl mx-auto pb-20">
-      
+
       {/* Back Button */}
       <div className="mb-8 animate-fade-in">
         <Link to="/" className="inline-flex items-center gap-2 text-sm text-subtle hover:text-ink transition-colors group">
@@ -53,17 +53,17 @@ const ProjectDetail = () => {
       {/* Mobile Only: Top Links (Minimal Split Button) */}
       <div className="lg:hidden mb-12 animate-fade-in">
         {(demoUrl || repoUrl) && (
-          <div className="flex w-full border border-border rounded-sm bg-white overflow-hidden shadow-sm">
+          <div className="flex w-full border border-border rounded-none bg-white overflow-hidden shadow-sm">
             {demoUrl && (
-              <a href={demoUrl} target="_blank" rel="noopener noreferrer" 
-                  className={`flex-1 py-3 px-4 text-center text-sm font-medium hover:bg-black/5 transition-colors flex items-center justify-center gap-2 text-ink ${repoUrl ? 'border-r border-border' : ''}`}>
+              <a href={demoUrl} target="_blank" rel="noopener noreferrer"
+                className="flex-1 py-3 px-4 text-center text-sm font-medium bg-zinc-900 text-white hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2">
                 <ExternalLink size={16} />
                 Live Demo
               </a>
             )}
             {repoUrl && (
-              <a href={repoUrl} target="_blank" rel="noopener noreferrer" 
-                  className="flex-1 py-3 px-4 text-center text-sm font-medium hover:bg-black/5 transition-colors flex items-center justify-center gap-2 text-ink">
+              <a href={repoUrl} target="_blank" rel="noopener noreferrer"
+                className="flex-1 py-3 px-4 text-center text-sm font-medium hover:bg-black/5 transition-colors flex items-center justify-center gap-2 text-ink">
                 <Github size={16} />
                 Source
               </a>
@@ -74,21 +74,21 @@ const ProjectDetail = () => {
 
       {/* Grid: Main Content + Right Sidebar */}
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-12 lg:gap-20">
-        
+
         {/* Left Column: Deep Dive Content */}
         <div className="space-y-16 animate-fade-in-up delay-100">
           {contentSections.map((section, index) => (
             <section key={index} className="relative group">
-               {/* Mobile Timeline Line */}
+              {/* Mobile Timeline Line */}
               <div className="absolute left-0 top-0 bottom-0 w-px bg-border md:hidden"></div>
-              
+
               <div className="flex items-baseline gap-4 mb-6 pl-6 md:pl-0">
                 <span className="font-mono text-xs text-accent font-bold opacity-50">0{index + 1}</span>
                 <h2 className="text-sm font-mono text-subtle uppercase tracking-widest border-b border-border pb-1 flex-grow">
                   {section.title}
                 </h2>
               </div>
-              
+
               <div className="pl-6 md:pl-8 prose prose-stone max-w-none prose-p:text-ink prose-p:font-sans prose-p:leading-8 prose-li:text-ink prose-a:text-accent hover:prose-a:underline">
                 <ReactMarkdown>{section.content}</ReactMarkdown>
               </div>
@@ -99,20 +99,20 @@ const ProjectDetail = () => {
         {/* Right Column: Premium Sidebar (Desktop) */}
         <aside className="hidden lg:block animate-slide-in-right">
           <div className="sticky top-24 space-y-8">
-            
+
             {/* Actions: Minimal Split Link - No 'Deployments' container */}
             {(demoUrl || repoUrl) && (
-              <div className="flex w-full border border-border rounded-sm bg-white overflow-hidden shadow-sm">
+              <div className="flex w-full border border-border rounded-none bg-white overflow-hidden shadow-sm">
                 {demoUrl && (
-                  <a href={demoUrl} target="_blank" rel="noopener noreferrer" 
-                     className={`flex-1 py-3 px-4 text-center text-sm font-medium hover:bg-black/5 transition-colors flex items-center justify-center gap-2 text-ink ${repoUrl ? 'border-r border-border' : ''}`}>
+                  <a href={demoUrl} target="_blank" rel="noopener noreferrer"
+                    className="flex-1 py-3 px-4 text-center text-sm font-medium bg-zinc-900 text-white hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2">
                     <ExternalLink size={16} />
                     Live Demo
                   </a>
                 )}
                 {repoUrl && (
-                  <a href={repoUrl} target="_blank" rel="noopener noreferrer" 
-                     className="flex-1 py-3 px-4 text-center text-sm font-medium hover:bg-black/5 transition-colors flex items-center justify-center gap-2 text-ink">
+                  <a href={repoUrl} target="_blank" rel="noopener noreferrer"
+                    className="flex-1 py-3 px-4 text-center text-sm font-medium hover:bg-black/5 transition-colors flex items-center justify-center gap-2 text-ink">
                     <Github size={16} />
                     Source
                   </a>
@@ -137,7 +137,7 @@ const ProjectDetail = () => {
 
             {/* Stats / Meta (Simulated) */}
             <div className="border-t border-border pt-6">
-               <div className="flex items-center gap-2 mb-4 text-ink">
+              <div className="flex items-center gap-2 mb-4 text-ink">
                 <Wrench size={16} />
                 <h3 className="font-serif text-lg">System Specs</h3>
               </div>
@@ -150,7 +150,7 @@ const ProjectDetail = () => {
                   <span>License</span>
                   <span className="font-mono text-ink">MIT</span>
                 </li>
-                 <li className="flex justify-between border-b border-border/50 pb-2">
+                <li className="flex justify-between border-b border-border/50 pb-2">
                   <span>Type</span>
                   <span className="font-mono text-ink">Full-Stack</span>
                 </li>
@@ -160,7 +160,7 @@ const ProjectDetail = () => {
           </div>
         </aside>
       </div>
-      
+
       {/* Bottom Navigation */}
       <PageNavigation />
     </div>
