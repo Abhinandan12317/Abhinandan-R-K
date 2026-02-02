@@ -196,7 +196,7 @@ export const PROJECTS: Project[] = [
       },
       {
         title: ProjectSectionType.LINKS,
-        content: '[GitHub Repo](https://github.com/Abhinandan12317/VidhiPath)'
+        content: '[GitHub Repo](https://github.com/Abhinandan12317/VidhiPath.ai)'
       }
     ]
   },
